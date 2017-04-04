@@ -3,7 +3,7 @@ package cs143;
 /**
  * This data-management class models a sorted set of Player objects.
  *
- * @author 
+ * @author Phuc Hong Le
  * @author 
  * @author
  * @author
@@ -33,7 +33,21 @@ public class SortedSet {
      * @return the index where the player was added, or -1 if not added
      */
     public int add(Player player) {
-        // TODO write this method body //
+        //insertion sort
+                int temp;
+        for (int i = 1; i < players.length; i++) {
+            for(int j = i ; j > 0 ; j--){
+                if(players[j].getName() != players[j-1].getName()){
+                    swapPlayers(players[j], players[j-1]);
+                }
+            }
+        }
+        return input;
+
+        if (count >= players.length) {
+            growArray();
+        }
+        
         return -1;
     }
     
@@ -108,7 +122,9 @@ public class SortedSet {
      * @param j the second index
      */
     private void swapPlayers(int i, int j) {
-        // TODO write this method body //
+        int temp = i;
+        i = j;
+        j = temp;
     }
     
     /**
