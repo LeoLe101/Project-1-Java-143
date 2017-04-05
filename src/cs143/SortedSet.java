@@ -36,10 +36,7 @@ public class SortedSet {
         //checking condition to add a new player
         if (this.size() >= this.capacity()) {
             growArray();
-        } else if (player.getName().equalsIgnoreCase(name)) {
-            
-        }
-        //add a new player and sort them
+        } //add a new player and sort them
         else {
             //insertion sort
             int pos = 0;
@@ -52,7 +49,6 @@ public class SortedSet {
                 }
             }
         }
-
         return -1;
     }
 
@@ -64,10 +60,19 @@ public class SortedSet {
      */
     public boolean remove(String name) {
         int index = find(name);
-        Player[] playerListShrink = new Player[players.length];
-        System.arraycopy(players, 0, playerListShrink, 0, players.length);
-        players = playerListShrink;
-        return true;
+        //case that the player is not found to remove
+        if (index == -1) {
+            return false;
+        } 
+        //case that the player is found to remove
+        else {
+            Player[] playerListShrink = new Player[players.length];
+            for (int i = index; i < this.size(); i++) {
+                playerListShrink[i] = players[i + 1];
+            }
+            players = playerListShrink;
+            return true;
+        }
     }
 
     /**
