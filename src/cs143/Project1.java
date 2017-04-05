@@ -77,7 +77,7 @@ public class Project1 {
                     + "(Player: h, Score: 17) (Player: g, Score: 16) "
                     + "(Player: f, Score: 15) (Player: e, Score: 14) "
                     + "(Player: d, Score: 13) (Player: b, Score: 11) "
-                    + "(Player: a, Score: 10) (Player: a, Score: 10) ]")) {
+                    + "(Player: a, Score: 10) (Player: k, Score: 9) ]")) {
                 System.out.println("TOSTRING PASS");
             } else {
                 System.out.println("TOSTRING FAIL");
