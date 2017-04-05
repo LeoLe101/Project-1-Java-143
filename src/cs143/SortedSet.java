@@ -33,18 +33,26 @@ public class SortedSet {
      * @return the index where the player was added, or -1 if not added
      */
     public int add(Player player) {
-        //adding a new player
-
-        //insertion sort
-        int pos = 0;
-        for (int i = 0; i < players.length; i++) {
-            pos = i;
-            while (pos > 0
-                    && players[pos - 1].getScore() > players[pos].getScore()) {
-                swapPlayers(pos, pos - 1);
-                pos = pos - 1;
+        //checking condition to add a new player
+        if (this.size() >= this.capacity()) {
+            growArray();
+        } else if (player.getName().equalsIgnoreCase(name)) {
+            
+        }
+        //add a new player and sort them
+        else {
+            //insertion sort
+            int pos = 0;
+            for (int i = 0; i < players.length; i++) {
+                pos = i;
+                while (pos > 0
+                        && players[pos - 1].getScore() > players[pos].getScore()) {
+                    swapPlayers(pos, pos - 1);
+                    pos = pos - 1;
+                }
             }
         }
+
         return -1;
     }
 
@@ -55,7 +63,10 @@ public class SortedSet {
      * @return true if removed, false if not found
      */
     public boolean remove(String name) {
-        // TODO write this method body //
+        int index = find(name);
+        Player[] playerListShrink = new Player[players.length];
+        System.arraycopy(players, 0, playerListShrink, 0, players.length);
+        players = playerListShrink;
         return true;
     }
 
@@ -66,13 +77,11 @@ public class SortedSet {
      * @return the index where the player is stored, or -1 if not found
      */
     public int find(String name) {
-        int result = 0;
+        int result = -1;
         for (int i = 0; i < this.size(); i++) {
             if (players[i].getName().equalsIgnoreCase(name)) {
                 result = i;
                 break;
-            } else {
-                
             }
         }
         return result;
@@ -85,6 +94,7 @@ public class SortedSet {
      * @return the player object, or null if index is out of bounds.
      */
     public Player get(int index) {
+        //in case that the index is larger or smaller than expected
         if (index < this.size() || index > 0) {
             return players[index];
         } else {
