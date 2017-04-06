@@ -73,13 +73,16 @@ public class SortedSet {
         } else {
             //case that the player is found to remove
             Player[] playerListShrink = new Player[capacity()];
-            for (int i = 0; i < this.size(); i++) {
+            //copy the array until the index
+            for (int i = 0; i < index; i++) {
                 playerListShrink[i] = players[i];
-                if (i == index) {
+            }
+            //copy the rest of the array without copying the object
+            for (int i = index; i < this.size(); i++) {
                     playerListShrink[i] = players[i + 1];
-                }
             }
             players = playerListShrink;
+            count--;
             return true;
         }
     }
@@ -144,12 +147,11 @@ public class SortedSet {
     public String toString() {
         //toString for output
         String stringOutPut = "";
-        for (int i = 0; i < count; i++) {
-            stringOutPut += "(Player: " + players[i].getName() + ", Score: "
-                    + players[i].getScore() + ") ";
+        for (int i = 0; i < this.size(); i++) {
+            stringOutPut += "(" + players[i].toString() + ") ";
         }
-        stringOutPut = stringOutPut.substring(0, stringOutPut.length() - 2);
-        return "[ " + stringOutPut + " ]";
+//        stringOutPut = stringOutPut.substring(0, stringOutPut.length());
+        return "[ " + stringOutPut + "]";
     }
 
     /**
@@ -173,7 +175,7 @@ public class SortedSet {
         //when the element is equal with the array's length, double the array
         if (count == players.length) {
             Player[] playerListDouble = new Player[capacity() * 2];
-            for (int i = 0; i < capacity(); i++) {
+            for (int i = 0; i < this.capacity(); i++) {
                 playerListDouble[i] = players[i];
             }
             players = playerListDouble;
