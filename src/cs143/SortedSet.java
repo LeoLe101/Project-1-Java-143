@@ -36,16 +36,16 @@ public class SortedSet {
         int result = -1;
         int pos = 0;
         //checking condition to add a new player
-        if (this.size() >= this.capacity()) {
+        if (count >= player.length) {
             growArray();
         }
         if (this.find(player.getName()) == -1) {
             //add the player at the end of the array
-            players[size()] = player;
+            players[count] = player;
             count++;
             //insertion sort the player for more than 1 player
-            if (size() > 1) {
-                for (int i = 0; i < size(); i++) {
+            if (count > 1) {
+                for (int i = 0; i < count; i++) {
                     pos = i;
                     while (pos > 0 && players[pos].getScore() > players[pos - 1].getScore()) {
                         swapPlayers(pos, pos - 1);
@@ -72,13 +72,13 @@ public class SortedSet {
             return false;
         } else {
             //case that the player is found to remove
-            Player[] playerListShrink = new Player[capacity()];
+            Player[] playerListShrink = new Player[player.length];
             //copy the array until the index
             for (int i = 0; i < index; i++) {
                 playerListShrink[i] = players[i];
             }
             //copy the rest of the array without copying the object
-            for (int i = index; i < this.size(); i++) {
+            for (int i = index; i < count; i++) {
                     playerListShrink[i] = players[i + 1];
             }
             players = playerListShrink;
@@ -95,7 +95,7 @@ public class SortedSet {
      */
     public int find(String name) {
         int result = -1;
-        for (int i = 0; i < this.size() && result < 0; i++) {
+        for (int i = 0; i < count && result < 0; i++) {
             if (this.players[i].getName().equalsIgnoreCase(name)) {
                 result = i;
             }
@@ -111,7 +111,7 @@ public class SortedSet {
      */
     public Player get(int index) {
         //in case that the index is larger or smaller than expected
-        if (index < this.size() && index >= 0) {
+        if (index < count && index >= 0) {
             return players[index];
         } else {
             return null;
@@ -120,6 +120,7 @@ public class SortedSet {
 
     /**
      * Provides access to the number of players currently in the set.
+     * Don't use it in the method because it is not efficient to do so!
      *
      * @return the number of players
      */
@@ -129,6 +130,7 @@ public class SortedSet {
 
     /**
      * Provides access to the current capacity of the underlying array.
+     * Don't use it in the method because it is not efficient to do so!
      *
      * @return the capacity of the array
      */
@@ -147,10 +149,10 @@ public class SortedSet {
     public String toString() {
         //toString for output
         String stringOutPut = "";
-        for (int i = 0; i < this.size(); i++) {
+        for (int i = 0; i < count; i++) {
             stringOutPut += "(" + players[i].toString() + ") ";
         }
-//        stringOutPut = stringOutPut.substring(0, stringOutPut.length());
+        //stringOutPut = stringOutPut.substring(0, stringOutPut.length());
         return "[ " + stringOutPut + "]";
     }
 
@@ -174,8 +176,8 @@ public class SortedSet {
     private void growArray() {
         //when the element is equal with the array's length, double the array
         if (count == players.length) {
-            Player[] playerListDouble = new Player[capacity() * 2];
-            for (int i = 0; i < this.capacity(); i++) {
+            Player[] playerListDouble = new Player[player.length * 2];
+            for (int i = 0; i < player.length; i++) {
                 playerListDouble[i] = players[i];
             }
             players = playerListDouble;
