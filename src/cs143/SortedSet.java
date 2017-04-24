@@ -36,7 +36,7 @@ public class SortedSet {
         int result = -1;
         int pos = 0;
         //checking condition to add a new player
-        if (count >= player.length) {
+        if (count >= players.length) {
             growArray();
         }
         if (this.find(player.getName()) == -1) {
@@ -72,7 +72,7 @@ public class SortedSet {
             return false;
         } else {
             //case that the player is found to remove
-            Player[] playerListShrink = new Player[player.length];
+            Player[] playerListShrink = new Player[players.length];
             //copy the array until the index
             for (int i = 0; i < index; i++) {
                 playerListShrink[i] = players[i];
@@ -176,8 +176,8 @@ public class SortedSet {
     private void growArray() {
         //when the element is equal with the array's length, double the array
         if (count == players.length) {
-            Player[] playerListDouble = new Player[player.length * 2];
-            for (int i = 0; i < player.length; i++) {
+            Player[] playerListDouble = new Player[players.length * 2];
+            for (int i = 0; i < players.length; i++) {
                 playerListDouble[i] = players[i];
             }
             players = playerListDouble;
